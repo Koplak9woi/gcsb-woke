@@ -3,7 +3,7 @@ bq mk fruit_store
 
 bq mk --table --description "Table for fruit details" $PROJECT_ID:fruit_store.fruit_details
 
-bq load --source_format=NEWLINE_DELIMITED_JSON --autodetect $PROJECT_ID:fruit_store.fruit_details gs://data-insights-course/labs/optimizing-for-performance/shopping_cart.json
+bq load --source_format=NEWLINE_DELIMITED_JSON --autodetect $PROJECT_ID:fruit_store.fruit_details gs://data-insights-course/labs/optimizing-for-performance/shopping_cart.json &
 
 echo "${GREEN}${BOLD}Task 2. Practice working with arrays in SQL Completed ${RESET}" &
 
