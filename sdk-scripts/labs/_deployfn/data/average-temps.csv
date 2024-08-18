@@ -1,0 +1,18 @@
+# Comma separated list of average monthly high and low temperatures in Fahrenheit by US city.
+City, Month, High, Low
+New York, Jan, 39, 26
+New York, May, 69, 53
+New York, Sep, 75, 61
+New York, Dec, 44, 31
+Austin, Jan, 62, 42
+Austin, May, 87, 67
+Austin, Sep, 91, 69
+Austin, Dec, 63, 42
+San Francisco, Jan, 66, 53
+San Francisco, May, 62, 49
+San Francisco, Sep, 70, 55
+San Francisco, Dec, 57, 46
+Minnesota, Jan, 24, 8
+Minnesota, May, 69, 49
+Minnesota, Sep, 72, 52
+Minnesota, Dec, 27, 12

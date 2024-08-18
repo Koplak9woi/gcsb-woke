@@ -1,0 +1,8 @@
+{
+    "name": "temperature-data-checker",
+    "version": "0.0.1",
+    "main": "index.js",
+    "dependencies": {
+        "@google-cloud/functions-framework": "^2.1.0"
+    }
+}

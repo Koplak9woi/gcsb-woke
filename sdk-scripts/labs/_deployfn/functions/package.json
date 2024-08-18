@@ -1,0 +1,7 @@
+{
+    "name": "arcade-hero-node",
+    "author": "AguzzTN54",
+    "dependencies": {
+        "@google-cloud/functions-framework": "^3.1.0"
+    }
+}
