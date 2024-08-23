@@ -1,4 +1,4 @@
-### GSP067, GSP074, GSP112, GSP732, ARC230, ARC231, ARC232, ARC233, ARC234, ARC235, ARC236, ARC237, GSP152, GSP702, GSP1201, GSP751, GSP184, GSP344
+### GSP067, GSP074, GSP112, GSP732, ARC230, ARC231, ARC232, ARC233, ARC234, ARC235, ARC236, ARC237, GSP152, GSP702, GSP1201, GSP751, GSP184, GSP344, \_deployfn, \_leastpol. \_ctrrun
 
 <!-- prettier-ignore -->
 ```js
@@ -56,5 +56,22 @@
     { var: 'ORD_IDENT', prop: 'project_0.startup_script.orders_image' },
     { var: 'PROD_IDENT', prop: 'project_0.startup_script.products_image' },
     { var: 'FRONT_IDENT', prop: 'project_0.startup_script.frontend_image' },
+];
+```
+
+### GSP374
+
+```js
+[
+    { var: 'EVENT', prop: 'project_0.startup_script.events_table' },
+    { var: 'TABLE', prop: 'project_0.startup_script.table' },
+    { var: 'X_GOAL', prop: 'project_0.startup_script.x_goal_mouth' },
+    { var: 'Y_GOAL', prop: 'project_0.startup_script.y_goal_mouth' },
+    { var: 'X_AXIS', prop: 'project_0.startup_script.x_axis' },
+    { var: 'Y_AXIS', prop: 'project_0.startup_script.y_axis' },
+    { var: 'Y_HALF', prop: 'project_0.startup_script.y_half_length' },
+    { var: 'FUNC_1', prop: 'project_0.startup_script.shot_distance' },
+    { var: 'FUNC_2', prop: 'project_0.startup_script.shot_angle' },
+    { var: 'MODEL', prop: 'project_0.startup_script.model_name' },
 ];
 ```
