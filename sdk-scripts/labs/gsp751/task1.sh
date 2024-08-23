@@ -1,4 +1,4 @@
-cd ./simple-project
+cd ./simple_project
 
 cat > variables.tf <<EOF_END
 /**
@@ -94,7 +94,7 @@ output "bucket-name" {
 }
 EOF_END
 
-terraform init
+# terraform init
 
 terraform apply --auto-approve
 

@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-variable "project_id" {
-  description = "The project ID to host the network in"
-  default     = "qwiklabs-gcp-01-5aa9bbb0f440"
-}
-
-variable "network_name" {
-  description = "The name of the VPC network being created"
-  default     = "example-vpc"
+locals {
+  health_check = {
+    check_interval_sec  = 1
+    healthy_threshold   = 4
+    timeout_sec         = 1
+    unhealthy_threshold = 5
+    port                = 8080
+    request_path        = "/mypath"
+    host                = "1.2.3.4"
+  }
 }

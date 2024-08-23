@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-variable "project_id" {
-  description = "The project ID to host the network in"
-  default     = "qwiklabs-gcp-01-5aa9bbb0f440"
-}
-
-variable "network_name" {
-  description = "The name of the VPC network being created"
-  default     = "example-vpc"
+output "load_balancer_default_ip" {
+  description = "The external ip address of the forwarding rule for default lb."
+  value       = module.load_balancer_default.external_ip
 }

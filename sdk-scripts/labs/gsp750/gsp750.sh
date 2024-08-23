@@ -40,11 +40,47 @@ resource "google_compute_instance" "vm_instance" {
 }
 EOF
 
-terraform init
+# terraform init
 
 terraform apply --auto-approve
 
-# rm main.tf
+# cat  > main.tf <<EOF
+# terraform {
+#   required_providers {
+#     google = {
+#       source = "hashicorp/google"
+#     }
+#   }
+# }
+# provider "google" {
+#   version = "3.5.0"
+#   project = "$PROJECT_ID"
+#   region  = "$REGION"
+#   zone    = "$ZONE"
+# }
+# resource "google_compute_network" "vpc_network" {
+#   name = "terraform-network"
+# }
+
+# resource "google_compute_instance" "vm_instance" {
+#   name         = "terraform-instance"
+#   machine_type = "e2-micro"
+#   tags         = ["web", "dev"]
+#   boot_disk {
+#     initialize_params {
+#       image = "debian-cloud/debian-11"
+#     }
+#   }
+#   network_interface {
+#     network = google_compute_network.vpc_network.name
+#     access_config {
+#     }
+#   }
+# }
+# EOF
+
+# terraform apply --auto-approve
+
 
 cat  > main.tf <<EOF
 terraform {
@@ -71,44 +107,6 @@ resource "google_compute_instance" "vm_instance" {
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
-    }
-  }
-  network_interface {
-    network = google_compute_network.vpc_network.name
-    access_config {
-    }
-  }
-}
-EOF
-
-terraform apply --auto-approve
-
-
-cat  > main.tf <<EOF
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-    }
-  }
-}
-provider "google" {
-  version = "3.5.0"
-  project = "$PROJECT_ID"
-  region  = "$REGION"
-  zone    = "$ZONE"
-}
-resource "google_compute_network" "vpc_network" {
-  name = "terraform-network"
-}
-
-resource "google_compute_instance" "vm_instance" {
-  name         = "terraform-instance"
-  machine_type = "e2-micro"
-  tags         = ["web", "dev"]
-  boot_disk {
-    initialize_params {
-      image = "cos-cloud/cos-stable"
     }
   }
   network_interface {
@@ -152,7 +150,7 @@ resource "google_compute_instance" "another_instance" {
 }
 EOF
 
-terraform plan
+# terraform plan
 
 terraform apply --auto-approve
 

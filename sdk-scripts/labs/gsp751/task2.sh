@@ -37,3 +37,7 @@ terraform init
 terraform apply --auto-approve
 
 gsutil cp *.html gs://$PROJECT_ID
+
+sleep 20
+
+terraform destroy --auto-approve
