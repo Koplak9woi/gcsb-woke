@@ -1,7 +1,14 @@
-bq query --nouse_legacy_sql "
+bq query --project_id=$PROJECT_ID --nouse_legacy_sql "
 CREATE OR REPLACE MODEL \`ecommerce.classification_model_2\`
 OPTIONS
-  (model_type='logistic_reg', input_label_cols = ['will_buy_on_return_visit']) AS
+  (
+    model_type='logistic_reg',
+    input_label_cols = ['will_buy_on_return_visit'],
+    early_stop = true,
+    MAX_ITERATIONS = 1,
+    LEARN_RATE_STRATEGY = 'CONSTANT',
+    LEARN_RATE = 0.5
+  ) AS
 
 WITH all_visitor_stats AS (
 SELECT
@@ -63,8 +70,47 @@ SELECT * EXCEPT(unique_session_id) FROM (
   country
 );"
 
+# bq query --project_id=$PROJECT_ID --nouse_legacy_sql "
+# CREATE OR REPLACE MODEL \`ecommerce.classification_model_2\`
+# OPTIONS
+#   (
+#     model_type='logistic_reg',
+#     input_label_cols = ['will_buy_on_return_visit'],
+#     early_stop = true,
+#     MAX_ITERATIONS = 1,
+#     LEARN_RATE_STRATEGY = 'CONSTANT',
+#     LEARN_RATE = 0.5
+#   )
+# AS
 
-bq query --nouse_legacy_sql "
+# #standardSQL
+# SELECT
+#   * EXCEPT(fullVisitorId)
+# FROM
+
+#   # features
+#   (SELECT
+#     fullVisitorId,
+#     IFNULL(totals.bounces, 0) AS bounces,
+#     IFNULL(totals.timeOnSite, 0) AS time_on_site
+#   FROM
+#     \`data-to-insights.ecommerce.web_analytics\`
+#   WHERE
+#     totals.newVisits = 1
+#     AND date = '20170430'
+#     AND device.isMobile = false
+#     AND totals.hits <= 2) # train on first 9 months
+#   JOIN
+#   (SELECT
+#     fullvisitorid,
+#     IF(COUNTIF(totals.transactions > 0 AND totals.newVisits IS NULL) > 0, 1, 0) AS will_buy_on_return_visit
+#   FROM
+#       \`data-to-insights.ecommerce.web_analytics\`
+#   GROUP BY fullvisitorid)
+#   USING (fullVisitorId)"
+
+
+bq query --project_id=$PROJECT_ID --nouse_legacy_sql "
 #standardSQL
 SELECT
   roc_auc,
@@ -137,7 +183,7 @@ SELECT * EXCEPT(unique_session_id) FROM (
 ));" &
 
 
-bq query --nouse_legacy_sql '
+bq query --project_id=$PROJECT_ID --nouse_legacy_sql '
 SELECT
 *
 FROM

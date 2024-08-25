@@ -2,21 +2,49 @@
 
 echo "${BG_MAGENTA}${BOLD}Starting Execution${RESET}"
 
-bq load --source_format=NEWLINE_DELIMITED_JSON --autodetect $PROJECT_ID:soccer.$EVENT gs://spls/bq-soccer-analytics/events.json &
+bq mk --project_id=$PROJECT_ID \
+ -t \
+ --expiration 3600 \
+ --description "This is my table" \
+ $PROJECT_ID:soccer.$EVENT \
+ qtr:STRING,sales:FLOAT,year:STRING &
 
-bq load --source_format=CSV --autodetect $PROJECT_ID:soccer.$TABLE gs://spls/bq-soccer-analytics/tags2name.csv &
+bq mk --project_id=$PROJECT_ID \
+ -t \
+ --expiration 3600 \
+ --description "This is my table" \
+ $PROJECT_ID:soccer.$TABLE \
+ qtr:STRING,sales:FLOAT,year:STRING &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.competitions gs://spls/bq-soccer-analytics/competitions.json &
+# bq load --project_id=$PROJECT_ID \
+#   --source_format=NEWLINE_DELIMITED_JSON \
+#   --autodetect $PROJECT_ID:soccer.$EVENT gs://spls/bq-soccer-analytics/events.json &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.matches gs://spls/bq-soccer-analytics/matches.json &
+# bq load --project_id=$PROJECT_ID \
+#   --source_format=CSV \
+#   --autodetect $PROJECT_ID:soccer.$TABLE gs://spls/bq-soccer-analytics/tags2name.csv &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.teams gs://spls/bq-soccer-analytics/teams.json &
+# bq load --project_id=$PROJECT_ID \
+#   --autodetect \
+#   --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.competitions gs://spls/bq-soccer-analytics/competitions.json &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.players gs://spls/bq-soccer-analytics/players.json &
+# bq load --project_id=$PROJECT_ID \
+#   --autodetect \
+#   --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.matches gs://spls/bq-soccer-analytics/matches.json &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.events gs://spls/bq-soccer-analytics/events.json & wait
+# bq load --project_id=$PROJECT_ID \
+#   --autodetect \
+#   --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.teams gs://spls/bq-soccer-analytics/teams.json &
 
-bq query --use_legacy_sql=false \
+# bq load --project_id=$PROJECT_ID \
+#   --autodetect \
+#   --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.players gs://spls/bq-soccer-analytics/players.json &
+
+# bq load --project_id=$PROJECT_ID \
+#   --autodetect \
+#   --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.events gs://spls/bq-soccer-analytics/events.json &
+
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 SELECT
 playerId,
@@ -41,9 +69,9 @@ HAVING
 numPkAtt >= 5
 ORDER BY
 PKSuccessRate DESC, numPKAtt DESC
-"
+" &
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 WITH
 Shots AS
@@ -82,9 +110,9 @@ GROUP BY
 ShotDistRound0
 ORDER BY
 ShotDistRound0
-"
+" &
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 CREATE MODEL \`$MODEL\`
 OPTIONS(
@@ -118,9 +146,9 @@ eventName = 'Shot' OR
 \`$FUNC_2\`(Events.positions[ORDINAL(1)].x,
 Events.positions[ORDINAL(1)].y) IS NOT NULL
 ;
-"
+" &
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 SELECT
 predicted_isGoal_probs[ORDINAL(1)].prob AS predictedGoalProb,
@@ -181,9 +209,9 @@ MODEL \`$MODEL\`,
 )
 ORDER BY
 predictedgoalProb
-"
+" &
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 CREATE FUNCTION \`$FUNC_1\`(x INT64, y INT64)
 RETURNS FLOAT64
@@ -195,7 +223,7 @@ AS (
  );
 " &
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 CREATE FUNCTION \`$FUNC_2\`(x INT64, y INT64)
 RETURNS FLOAT64
@@ -223,6 +251,6 @@ AS (
 " & wait
 
 
-echo "${YELLOW}${BOLD}NOW${RESET}" "${WHITE}${BOLD}FOLLOW${RESET}" "${GREEN}${BOLD}VIDEO'S INSTRUCTIONS${RESET}"
+echo "${RED}${BOLD}Congratulations${RESET}" "${WHITE}${BOLD}for${RESET}" "${GREEN}${BOLD}Completing the Lab !!!${RESET}"
 
 #-----------------------------------------------------end----------------------------------------------------------#

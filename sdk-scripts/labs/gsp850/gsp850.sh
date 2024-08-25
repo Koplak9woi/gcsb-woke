@@ -2,7 +2,7 @@
 
 echo "${BG_MAGENTA}${BOLD}Starting Execution${RESET}"
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 SELECT
  Events.playerId,
@@ -23,7 +23,7 @@ ORDER BY
  numAssists 
 " &
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 WITH
 Passes AS
@@ -75,7 +75,7 @@ ORDER BY
 
 " &
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 WITH
 Shots AS
@@ -116,7 +116,7 @@ ORDER BY
  ShotDistRound0
 " &
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 WITH
 Shots AS

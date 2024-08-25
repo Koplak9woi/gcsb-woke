@@ -2,19 +2,22 @@
 
 echo "${YELLOW}${BOLD}Starting${RESET}" "${GREEN}${BOLD}Execution${RESET}"
 
-bq mk ecommerce
+bq mk --project_id=$PROJECT_ID ecommerce
 
 cd ./labs/gsp229/
 
 ./model2.sh & 
 
-bq query --nouse_legacy_sql "
+bq query --project_id=$PROJECT_ID --nouse_legacy_sql "
 CREATE OR REPLACE MODEL \`ecommerce.classification_model\`
 OPTIONS
-(
-model_type='logistic_reg',
-input_label_cols = ['will_buy_on_return_visit']
-)
+  (
+    model_type='logistic_reg',
+    input_label_cols = ['will_buy_on_return_visit'],
+    early_stop = true,
+    MAX_ITERATIONS = 1,
+    LEARN_RATE_STRATEGY = 'CONSTANT'
+  )
 AS
 
 #standardSQL
@@ -33,7 +36,7 @@ FROM
     totals.newVisits = 1
     AND date = '20170430'
     AND device.isMobile = false
-    AND totals.hits <= 3) # train on first 9 months
+    AND totals.hits <= 2) # train on first 9 months
   JOIN
   (SELECT
     fullvisitorid,
@@ -43,7 +46,7 @@ FROM
   GROUP BY fullvisitorid)
   USING (fullVisitorId)"
 
-bq query --nouse_legacy_sql '
+bq query --project_id=$PROJECT_ID --nouse_legacy_sql '
 SELECT
   roc_auc,
   CASE

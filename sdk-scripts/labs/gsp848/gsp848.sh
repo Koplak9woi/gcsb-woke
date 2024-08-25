@@ -2,28 +2,71 @@
 
 echo "${YELLOW}${BOLD}Starting${RESET}" "${GREEN}${BOLD}Execution${RESET}"
 
-bq --location=us mk --dataset $PROJECT_ID:soccer
+bq --location=us mk --project_id=$PROJECT_ID --dataset $PROJECT_ID:soccer
 
 
 #task3
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.competitions gs://spls/bq-soccer-analytics/competitions.json &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.matches gs://spls/bq-soccer-analytics/matches.json &
+bq mk --project_id=$PROJECT_ID \
+  -t \
+  --expiration 3600 \
+  --description "This is my table" \
+  $PROJECT_ID:soccer.tags2name \
+  qtr:STRING &
+  
+bq mk --project_id=$PROJECT_ID \
+  -t \
+  --expiration 3600 \
+  --description "This is my table" \
+  $PROJECT_ID:soccer.competitions \
+  qtr:STRING &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.teams gs://spls/bq-soccer-analytics/teams.json &
+bq mk --project_id=$PROJECT_ID \
+  -t \
+  --expiration 3600 \
+  --description "This is my table" \
+  $PROJECT_ID:soccer.matches \
+  qtr:STRING &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.players gs://spls/bq-soccer-analytics/players.json &
+bq mk --project_id=$PROJECT_ID \
+  -t \
+  --expiration 3600 \
+  --description "This is my table" \
+  $PROJECT_ID:soccer.teams \
+  qtr:STRING &
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.events gs://spls/bq-soccer-analytics/events.json &
+bq mk --project_id=$PROJECT_ID \
+  -t \
+  --expiration 3600 \
+  --description "This is my table" \
+  $PROJECT_ID:soccer.players \
+  qtr:STRING &
+
+bq mk --project_id=$PROJECT_ID \
+  -t \
+  --expiration 3600 \
+  --description "This is my table" \
+  $PROJECT_ID:soccer.events \
+  qtr:STRING &
+
+# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.competitions gs://spls/bq-soccer-analytics/competitions.json &
+
+# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.matches gs://spls/bq-soccer-analytics/matches.json &
+
+# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.teams gs://spls/bq-soccer-analytics/teams.json &
+
+# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.players gs://spls/bq-soccer-analytics/players.json &
+
+# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.events gs://spls/bq-soccer-analytics/events.json &
 
 
 # task 4
 
-bq load --autodetect --source_format=CSV $PROJECT_ID:soccer.tags2name gs://spls/bq-soccer-analytics/tags2name.csv & wait
+# bq load --autodetect --source_format=CSV $PROJECT_ID:soccer.tags2name gs://spls/bq-soccer-analytics/tags2name.csv &
 
 #task 6
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "
 SELECT
   (firstName || ' ' || lastName) AS player,
@@ -41,7 +84,7 @@ LIMIT 5
 #task 7
 
 
-bq query --use_legacy_sql=false \
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false \
 "SELECT
   eventId,
   eventName,
@@ -52,7 +95,7 @@ GROUP BY
   eventId, eventName
 ORDER BY
   numEvents DESC
-"
+" & wait
 
 echo "${RED}${BOLD}Congratulations${RESET}" "${WHITE}${BOLD}for${RESET}" "${GREEN}${BOLD}Completing the Lab !!!${RESET}"
 

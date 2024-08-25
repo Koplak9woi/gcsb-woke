@@ -3,7 +3,7 @@
 
 echo "${YELLOW}${BOLD}Starting${RESET}" "${GREEN}${BOLD}Execution${RESET}"
 
-bq query --use_legacy_sql=false '
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false '
 SELECT
  date,
  label,
@@ -20,7 +20,7 @@ ORDER BY
  totalGoals DESC, date DESC
 ' &
 
-bq query --use_legacy_sql=false '
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false '
 SELECT
  playerId,
  (Players.firstName || " " || Players.lastName) AS playerName,
@@ -39,7 +39,7 @@ ORDER BY
 LIMIT 10
 ' &
 
-bq query --use_legacy_sql=false '
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false '
 SELECT
  playerId,
  (Players.firstName || " " || Players.lastName) AS playerName,
@@ -63,7 +63,7 @@ HAVING
  numPkAtt >= 5
 ORDER BY
  PKSuccessRate DESC, numPKAtt DESC
-'
+' & wait
 
 echo "${RED}${BOLD}Congratulations${RESET}" "${WHITE}${BOLD}for${RESET}" "${GREEN}${BOLD}Completing the Lab !!!${RESET}"
 

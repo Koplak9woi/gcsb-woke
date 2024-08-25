@@ -2,7 +2,9 @@
 
 echo "${YELLOW}${BOLD}Starting${RESET}" "${GREEN}${BOLD}Execution${RESET}"
 
-bq query --use_legacy_sql=false "
+cd ./labs/gsp851
+
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false "
 CREATE FUNCTION \`soccer.GetShotDistanceToGoal\`(x INT64, y INT64)
 RETURNS FLOAT64
 AS (
@@ -16,7 +18,7 @@ AS (
 " &
 
 
-bq query --use_legacy_sql=false "
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false "
 CREATE FUNCTION \`soccer.GetShotAngleToGoal\`(x INT64, y INT64)
 RETURNS FLOAT64
 AS (
@@ -42,15 +44,20 @@ AS (
   ) * 180 / ACOS(-1)
  )
 ;
-" & wait
+" &
+
 
 ./tree-model.sh &
 
-bq query --use_legacy_sql=false "
+bq query --project_id=$PROJECT_ID --use_legacy_sql=false "
 CREATE MODEL \`soccer.xg_boosted_tree_model\`
 OPTIONS(
- model_type = 'BOOSTED_TREE_CLASSIFIER',
- input_label_cols = ['isGoal']
+    model_type = 'BOOSTED_TREE_CLASSIFIER',
+    input_label_cols = ['isGoal'],
+    early_stop = true,
+    MAX_ITERATIONS = 1,
+    LEARN_RATE_STRATEGY = 'CONSTANT',
+    LEARN_RATE = 0.5
  ) AS
 
 SELECT
@@ -85,15 +92,7 @@ WHERE
    (eventName = 'Free Kick' AND subEventName IN ('Free kick shot', 'Penalty'))
  )
 ;
-"
-
-bq query --use_legacy_sql=false "
-SELECT
- *
-FROM
- ML.WEIGHTS(MODEL soccer.xg_logistic_reg_model)
-;
-"
+" & wait
 
 
 
