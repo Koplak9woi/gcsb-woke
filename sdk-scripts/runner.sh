@@ -23,20 +23,22 @@ export RESET=`tput sgr0`
 gcloud auth revoke --all
 
 # Use this If NodeJS is installed on the system where you run the script
-node browser-automation.js &
+# node browser-automation.js &
 
 # Use this If NodeJS is installed on Windows but you're using WSL to run the script.
 # Please ensure it's set to your NodeJS path.
-# "/mnt/c/Program Files/nodejs/node.exe" browser-automation.js &
+export node="/mnt/c/Program Files/nodejs/node.exe"
+"$node" browser-automation.js &
 
 
-# INITIALIZING GOOGLE CLOUD SDK 
+# INITIALIZING GOOGLE CLOUD SDK
 # ./autoinit.sh       # Disable this if your system doesn't support "expect" command
 
 gcloud auth login   # Faster Initialization
 
-# If your system doesn't support expect, use this instead to manualy initializing Google Cloud SDK.
-# gcloud init --skip-diagnostics
+# Use Below to create Credential for Workspace API
+# yes | gcloud auth application-default login \
+#     --scopes=openid,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/script.projects
 
 # DECLARE VARIABLES
 while IFS='=' read -ra line; do
@@ -48,10 +50,12 @@ done < tmp/variables.txt
 
 # Define GCP Variables
 export GOOGLE_CLOUD_PROJECT=$PROJECT_ID
-export USER_EMAIL=$(gcloud auth list --format "value(ACCOUNT)")
+export GOOGLE_CLOUD_QUOTA_PROJECT=$PROJECT_ID
 export USER_NAME=$(echo $USER_EMAIL | grep -oE "(student[-a-z0-9]+)")
 export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/legacy_credentials/$USER_EMAIL/adc.json"
-gcloud config set project $PROJECT_ID
+
+# Use this for Application Default Credential Auth
+# export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/application_default_credentials.json"
 
 # REPlACE WITH YOUR LAB ID
 LABID=""   # example => gsp016

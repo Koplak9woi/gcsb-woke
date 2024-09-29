@@ -1,4 +1,4 @@
-### GSP067, GSP074, GSP112, GSP732, ARC230, ARC231, ARC232, ARC233, ARC234, ARC235, ARC236, ARC237, GSP152, GSP702, GSP1201, GSP751, GSP184, GSP344, \_deployfn, \_leastpol. \_ctrrun
+### ARC230, ARC231, ARC232, ARC233, ARC234, ARC235, ARC236, ARC237, GSP055, GSP067, GSP074, GSP112, GSP732, GSP152, GSP702, GSP1201, GSP751, GSP761 GSP184, GSP449, GSP196, GSP344, GSP1145, GSP644, \_deployfn, \_leastpol, \_ctrrun, \_pubsubrun
 
 <!-- prettier-ignore -->
 ```js
@@ -7,12 +7,21 @@
 ]
 ```
 
-# GSP022, GSP031, GSP087, GSP151, GSP153, GSP156, GSP119, GSP750, GSP119, GSP183
+# GSP022, GSP031, GSP087, GSP151, GSP153, GSP156, GSP119, GSP750, GSP119, GSP183, GSP219, GSP646, GSP604
 
 <!-- prettier-ignore -->
 ```js
 [
     { var: 'ZONE', prop: 'project_0.default_zone_1' },
+]
+```
+
+# GSP1086
+
+<!-- prettier-ignore -->
+```js
+[
+    { var: 'ZONE', prop: 'primary_project.default_zone_1' },
 ]
 ```
 
@@ -25,6 +34,15 @@
 ];
 ```
 
+### GSP118
+
+```js
+[
+    { var: 'ZONE_1', prop: 'project_0.default_zone_1' },
+    { var: 'ZONE_2', prop: 'project_0.default_zone_2' },
+];
+```
+
 ### GSP016
 
 ```js
@@ -32,6 +50,27 @@
     { var: 'ZONE_1', prop: 'project_0.default_zone_1' },
     { var: 'ZONE_2', prop: 'project_0.default_zone_2' },
     { var: 'ZONE_3', prop: 'project_0.default_zone_3' },
+];
+```
+
+### GSP206
+
+```js
+[
+    { var: 'REGION_1', prop: 'project_0.default_region_1' },
+    { var: 'REGION_2', prop: 'project_0.default_region_2' },
+    { var: 'REGION_3', prop: 'project_0.default_region_3' },
+];
+```
+
+### GSP342
+
+```js
+[
+    { var: 'ZONE', prop: 'project_0.default_zone_1' },
+    { var: 'SERVICE_ACCOUNT', prop: 'project_0.startup_script.service_account' },
+    { var: 'CLUSTER', prop: 'project_0.startup_script.k8s_cluster_name' },
+    { var: 'CUSTOM_ROLE', prop: 'project_0.startup_script.custom_security_role' },
 ];
 ```
 
@@ -56,6 +95,22 @@
     { var: 'ORD_IDENT', prop: 'project_0.startup_script.orders_image' },
     { var: 'PROD_IDENT', prop: 'project_0.startup_script.products_image' },
     { var: 'FRONT_IDENT', prop: 'project_0.startup_script.frontend_image' },
+];
+```
+
+### GSP787
+
+```js
+[
+    { var: 'DATE', prop: 'project_0.startup_script.date_code' },
+    { var: 'MONTH', prop: 'project_0.startup_script.month' },
+    { var: 'RANGE', prop: 'project_0.startup_script.date_range' },
+    { var: 'LIMIT', prop: 'project_0.startup_script.limit_value' },
+    { var: 'TASK2_DEATH', prop: 'project_0.startup_script.death_count' },
+    { var: 'TASK3_CASES', prop: 'project_0.startup_script.confirmed_cases' },
+    { var: 'TASK5_DEATH', prop: 'project_0.startup_script.death_count_in_italy' },
+    { var: 'TASK6_START', prop: 'project_0.startup_script.start_date_india_code' },
+    { var: 'TASK6_END', prop: 'project_0.startup_script.close_date_india_code' },
 ];
 ```
 
