@@ -16,7 +16,7 @@ const lookerLogin = async ({ browser, username, password, url }) => {
     return lookerPage;
 };
 
-const googleLogin = async ({ browser, username, password }) => {
+const googleLogin = async ({ browser, username, password, authorize = true }) => {
     const googlePage = await waitForPage(browser, /v3\/signin\/identifier/);
     const authKeyMode = /authcode.html/.test(googlePage.url());
 
@@ -32,21 +32,22 @@ const googleLogin = async ({ browser, username, password }) => {
     await googlePage.waitForEvent('load');
 
     // I Understand
-    if (!/signin\/oauth\/id/.test(googlePage.url())) {
+    if (/speedbump\/gaplustos/.test(googlePage.url())) {
         const uBtn = googlePage.locator('#confirm');
-        await uBtn.waitFor();
         await uBtn.click();
     }
 
-    // Continue
-    // const contBTN = googlePage.locator('button', { hasText: 'Continue' });
-    // await contBTN.waitFor();
-    // await contBTN.click();
+    if (!authorize) return googlePage;
 
-    // // Allow
-    // const allowBtn = googlePage.locator('button', { hasText: 'Allow' });
-    // await allowBtn.waitFor();
-    // await allowBtn.click();
+    // Continue;
+    const contBTN = googlePage.locator('button', { hasText: 'Continue' });
+    await contBTN.waitFor();
+    await contBTN.click();
+
+    // Allow
+    const allowBtn = googlePage.locator('button', { hasText: 'Allow' });
+    await allowBtn.waitFor();
+    await allowBtn.click();
 
     if (!authKeyMode) return googlePage;
 

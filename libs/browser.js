@@ -1,3 +1,4 @@
+const { readFileSync } = require('fs');
 const { chromium } = require('playwright');
 
 // Connect to the browser you used to log in to the GCSB.
@@ -5,6 +6,19 @@ const browserContext = async (port) => {
     const browserInstance = await chromium.connectOverCDP('http://localhost:' + port);
     const browser = browserInstance.contexts()[0];
     browser.setDefaultTimeout(1000 * 60 * 10); // 10 minutes
+    return { browserInstance, browser };
+};
+
+const privateBrowser = async () => {
+    const executablePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+    const browserInstance = await chromium.launch({
+        executablePath,
+        headless: true,
+        args: ['--profile-directory=Default', '--disable-blink-features=AutomationControlled'],
+        ignoreDefaultArgs: ['--disable-features', '--enable-automation'],
+    });
+    const browser = await browserInstance.newContext();
+    browser.setDefaultTimeout(1000 * 60 * 3); // 3 minutes
     return { browserInstance, browser };
 };
 
@@ -26,7 +40,7 @@ const waitForPage = (browser, uri) => {
             if (!page) return;
             clearInterval(timeout);
             return resolve(page);
-        }, 2000);
+        }, 10);
     });
 };
 
@@ -103,9 +117,36 @@ const delayed = (time) => {
     });
 };
 
+const uploadDrag = async (page, target, fileList = []) => {
+    const files = [];
+
+    fileList.forEach(({ filePath, mime }) => {
+        const fpath = filePath;
+        const fileString = readFileSync(fpath).toString('base64');
+        const buffer = `data:application/octet-stream;base64,${fileString}`;
+        files.push({ buffer, filePath, mime });
+        console.log('Uploading ' + filePath);
+    });
+
+    const dataTransfer = await page.evaluateHandle(async (files = []) => {
+        const dt = new DataTransfer();
+        for (let i = 0; i < files.length; i++) {
+            const { buffer, filePath, mime } = files[i];
+            const blobData = await fetch(buffer).then((res) => res.blob());
+            const file = new File([blobData], filePath, { type: mime });
+            dt.items.add(file);
+        }
+        return dt;
+    }, files);
+
+    await page.dispatchEvent(target, 'drop', { dataTransfer });
+};
+
 exports.browserContext = browserContext;
+exports.privateBrowser = privateBrowser;
 exports.getPage = getPage;
 exports.waitForPage = waitForPage;
 exports.waitForResources = waitForResources;
 exports.labProgressChecker = labProgressChecker;
 exports.delayed = delayed;
+exports.uploadDrag = uploadDrag;
