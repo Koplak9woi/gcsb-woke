@@ -39,10 +39,10 @@ let lab_persona = '';
 let service_url = '';
 let lab_topic = '';
 
-const cors = 'https://api.wishsimulator.app/gcsb?u='; // CORS Anywhere, Replace this if necessary.
+const cors = 'https://cors-get-proxy.sirjosh.workers.dev/?url='; // CORS Anywhere, Replace this if necessary.
 const corePath = '/main.dart.js';
 const quizPath = '/assets/config/tasks.json';
-const personaPath = '/assets/config/persona.json';
+const personaPath = '/v1/v1';
 
 /**
  * CHATTING TASK
@@ -74,12 +74,8 @@ const chatPersona = async (personaURL) => {
 
 const chatTask = async () => {
     console.log('%cFetching ChatBot.. Please Wait!', 'color: #4285f4; font-weight:bold;');
-    const data = await fetch(cors + service_url + personaPath);
-    const { persona } = await data.json();
-    const usedPersona = persona.find(({ name }) => name === lab_persona);
-    const { name, endpoint, role, knowledge } = usedPersona;
     const personaURL = await getChatAPIHost();
-    const url = `${personaURL}${endpoint}?name=${name}&role=${role}&knowledge=${knowledge}`;
+    const url = `${cors + personaURL}/v1/v1?name=${lab_persona}&message=Hello&role=tutor&knowledge=${lab_topic}`;
     const chat = await chatPersona(url);
     return chat;
 };
@@ -149,7 +145,7 @@ const taskCheater = async (resource) => {
         isProcessed = true;
 
         ({ service_url, lab_persona, lab_topic } = startup_script);
-        await chatTask();
+        // chatTask();
         await quizTask();
         checkLab(labInstanceId);
     } catch (e) {}
