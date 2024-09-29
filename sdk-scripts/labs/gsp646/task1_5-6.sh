@@ -24,7 +24,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 deploy_function(){
     gcloud functions deploy unused_ip_function \
         --trigger-http \
-        --runtime=nodejs12 \
+        --runtime=nodejs18 \
         --region=$REGION \
         --allow-unauthenticated \
         --project=$PROJECT_ID 

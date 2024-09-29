@@ -5,7 +5,7 @@ echo "${YELLOW}${BOLD}Starting Execution ${RESET}"
 
 gcloud storage buckets create gs://$PROJECT_ID --project $PROJECT_ID
 
-gcloud storage cp -r gs://spls/gsp087/* gs://$PROJECT_ID --project $PROJECT_ID
+gcloud storage cp -r gs://spls/gsp087/* gs://$PROJECT_ID --project $PROJECT_ID &
 
 echo "${GREEN}${BOLD}Task 2 Completed${RESET}" &
 
