@@ -213,7 +213,7 @@ const labProgressChecker = async ({ labID, progress, ui = false }) => {
         const { step_complete = [] } = assessmentInfo;
 
         const steps = step_complete.map(async (isComplete, i) => {
-            if (isComplete) return checkUI(i);
+            if (isComplete !== false) return checkUI(i);
             const justComplete = await checkStep(labID, i + 1);
             if (justComplete) checkUI(i);
             return justComplete;
@@ -241,7 +241,8 @@ const labProgressChecker = async ({ labID, progress, ui = false }) => {
         if (!ui) return;
         if (!trackerPanel[i]) return true;
         const checkButton = trackerPanel[i].shadowRoot.querySelector('ql-button');
-        const btn = checkButton?.shadowRoot.querySelector('button');
+        const filledBTN = checkButton?.shadowRoot.querySelector('md-filled-button');
+        const btn = filledBTN?.shadowRoot.querySelector('button');
         if (btn.disabled) return true;
         btn.click();
         return true;
@@ -249,7 +250,8 @@ const labProgressChecker = async ({ labID, progress, ui = false }) => {
 
     const endLab = async () => {
         const finalize = document.querySelector('#js-are-you-sure-button');
-        const finalizeButton = finalize.shadowRoot.querySelector('button');
+        const mdText = finalize?.shadowRoot.querySelector('md-text-button');
+        const finalizeButton = mdText.shadowRoot.querySelector('button');
         finalizeButton.click();
     };
 
