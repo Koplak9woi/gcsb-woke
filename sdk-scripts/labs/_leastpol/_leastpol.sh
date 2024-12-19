@@ -63,7 +63,7 @@ export BILLING_INITIATOR_EMAIL="billing-initiator@$PROJECT_ID.iam.gserviceaccoun
 gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member="serviceAccount:$BILLING_INITIATOR_EMAIL" \
     --role="roles/run.invoker" \
-    --project $PROJECT_ID
+    --project $PROJECT_ID &
 
 # =================================== TASK 4 ==============================
 
@@ -104,7 +104,7 @@ curl -X POST -H "Content-Type: application/json" $BILLING_SERVICE_2_URL \
 
 curl -X POST -H "Content-Type: application/json" $BILLING_SERVICE_2_URL \
     -H "Authorization: Bearer $TOKEN" \
-    -d '{"userid": "1234", "minBalance": 500}'
+    -d '{"userid": "1234", "minBalance": 500}' & wait
 
 echo "${RED}${BOLD}Congratulations${RESET}" "${WHITE}${BOLD}for${RESET}" "${GREEN}${BOLD}Completing the Lab !!!${RESET}"
 

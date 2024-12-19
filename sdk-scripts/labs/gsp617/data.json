@@ -1,0 +1,265 @@
+[
+    {
+        "logName": "projects/qwiklabs-gcp-00-abe126c1e2db/logs/cloudaudit.googleapis.com%2Fdata_access",
+        "resource": {
+            "type": "bigquery_resource",
+            "labels": {
+                "project_id": "qwiklabs-gcp-00-abe126c1e2db"
+            }
+        },
+        "protopayload_auditlog": {
+            "serviceName": "bigquery.googleapis.com",
+            "methodName": "jobservice.jobcompleted",
+            "resourceName": "projects/qwiklabs-gcp-00-abe126c1e2db/jobs/bqjob_r5842aca04a134c7b_00000191d98e1d50_1",
+            "resourceLocation": null,
+            "numResponseItems": null,
+            "status": null,
+            "authenticationInfo": {
+                "principalEmail": "student-01-5e47d9fce609@qwiklabs.net",
+                "authoritySelector": null,
+                "serviceAccountKeyName": null,
+                "serviceAccountDelegationInfo": [],
+                "principalSubject": null,
+                "serviceDelegationHistory": null
+            },
+            "authorizationInfo": [],
+            "policyViolationInfo": null,
+            "requestMetadata": {
+                "callerIp": "34.124.242.31",
+                "callerSuppliedUserAgent": "google-cloud-sdk489.0.0 google-api-python-client (gzip),gzip(gfe)",
+                "callerNetwork": null,
+                "requestAttributes": null,
+                "destinationAttributes": null
+            },
+            "servicedata_v1_bigquery": {
+                "tableInsertRequest": null,
+                "tableUpdateRequest": null,
+                "datasetListRequest": null,
+                "datasetInsertRequest": null,
+                "datasetUpdateRequest": null,
+                "jobInsertRequest": null,
+                "jobQueryRequest": null,
+                "jobGetQueryResultsRequest": null,
+                "tableDataListRequest": null,
+                "setIamPolicyRequest": null,
+                "tableInsertResponse": null,
+                "tableUpdateResponse": null,
+                "datasetInsertResponse": null,
+                "datasetUpdateResponse": null,
+                "jobInsertResponse": null,
+                "jobQueryResponse": null,
+                "jobGetQueryResultsResponse": null,
+                "jobQueryDoneResponse": null,
+                "policyResponse": null,
+                "jobCompletedEvent": {
+                    "eventName": "query_job_completed",
+                    "job": {
+                        "jobName": {
+                            "projectId": "qwiklabs-gcp-00-abe126c1e2db",
+                            "jobId": "bqjob_r5842aca04a134c7b_00000191d98e1d50_1",
+                            "location": "US"
+                        },
+                        "jobConfiguration": {
+                            "query": {
+                                "query": "select CONCAT(departure_airport, \"-\", arrival_airport) as route, count(*) as numberflights\n from `bigquery-samples.airline_ontime_data.airline_id_codes` ac,\n `qwiklabs-resources.qlairline_ontime_data.flights` fl\n where ac.code \u003d fl.airline_code\n and regexp_contains(ac.airline ,  r\"Alaska\")\n group by 1\n order by 2 desc\n LIMIT 10",
+                                "destinationTable": {
+                                    "projectId": "qwiklabs-gcp-00-abe126c1e2db",
+                                    "datasetId": "_d7b2b8d8bab71ae6db8f8a2342a39fafcaa7506c",
+                                    "tableId": "anona7fc4611_612b_4bf2_befd_b66cc583e407"
+                                },
+                                "createDisposition": "CREATE_IF_NEEDED",
+                                "writeDisposition": "WRITE_TRUNCATE",
+                                "defaultDataset": null,
+                                "tableDefinitions": [],
+                                "queryPriority": "QUERY_INTERACTIVE",
+                                "destinationTableEncryption": null,
+                                "statementType": "SELECT"
+                            },
+                            "load": null,
+                            "extract": null,
+                            "tableCopy": null,
+                            "dryRun": null,
+                            "labels": []
+                        },
+                        "jobStatus": {
+                            "state": "DONE",
+                            "error": null,
+                            "additionalErrors": []
+                        },
+                        "jobStatistics": {
+                            "createTime": "2024-09-10 01:30:55.422000 UTC",
+                            "startTime": "2024-09-10 01:30:55.586000 UTC",
+                            "endTime": "2024-09-10 01:30:56.081000 UTC",
+                            "totalProcessedBytes": "1200056843",
+                            "totalBilledBytes": "1200619520",
+                            "billingTier": "1",
+                            "totalSlotMs": "6442",
+                            "reservationUsage": [],
+                            "reservation": "unreserved",
+                            "referencedTables": [
+                                {
+                                    "projectId": "bigquery-samples",
+                                    "datasetId": "airline_ontime_data",
+                                    "tableId": "airline_id_codes"
+                                },
+                                {
+                                    "projectId": "qwiklabs-resources",
+                                    "datasetId": "qlairline_ontime_data",
+                                    "tableId": "flights"
+                                }
+                            ],
+                            "totalTablesProcessed": "2",
+                            "referencedViews": [],
+                            "totalViewsProcessed": null,
+                            "queryOutputRowCount": "10",
+                            "totalLoadOutputBytes": null
+                        }
+                    }
+                },
+                "tableDataReadEvents": []
+            }
+        },
+        "textPayload": null,
+        "timestamp": "2024-09-10 01:30:56.118964 UTC",
+        "receiveTimestamp": "2024-09-10 01:30:57.007431 UTC",
+        "severity": "INFO",
+        "insertId": "jzzpi6ee99lk",
+        "httpRequest": null,
+        "operation": null,
+        "trace": null,
+        "spanId": null,
+        "traceSampled": null,
+        "sourceLocation": null,
+        "split": null,
+        "errorGroups": []
+    },
+    {
+        "logName": "projects/qwiklabs-gcp-00-abe126c1e2db/logs/cloudaudit.googleapis.com%2Fdata_access",
+        "resource": {
+            "type": "bigquery_resource",
+            "labels": {
+                "project_id": "qwiklabs-gcp-00-abe126c1e2db"
+            }
+        },
+        "protopayload_auditlog": {
+            "serviceName": "bigquery.googleapis.com",
+            "methodName": "jobservice.jobcompleted",
+            "resourceName": "projects/qwiklabs-gcp-00-abe126c1e2db/jobs/bqjob_r6e87952d99622e7d_00000191d98e0c92_1",
+            "resourceLocation": null,
+            "numResponseItems": null,
+            "status": null,
+            "authenticationInfo": {
+                "principalEmail": "student-01-5e47d9fce609@qwiklabs.net",
+                "authoritySelector": null,
+                "serviceAccountKeyName": null,
+                "serviceAccountDelegationInfo": [],
+                "principalSubject": null,
+                "serviceDelegationHistory": null
+            },
+            "authorizationInfo": [],
+            "policyViolationInfo": null,
+            "requestMetadata": {
+                "callerIp": "34.124.242.31",
+                "callerSuppliedUserAgent": "google-cloud-sdk489.0.0 google-api-python-client (gzip),gzip(gfe)",
+                "callerNetwork": null,
+                "requestAttributes": null,
+                "destinationAttributes": null
+            },
+            "servicedata_v1_bigquery": {
+                "tableInsertRequest": null,
+                "tableUpdateRequest": null,
+                "datasetListRequest": null,
+                "datasetInsertRequest": null,
+                "datasetUpdateRequest": null,
+                "jobInsertRequest": null,
+                "jobQueryRequest": null,
+                "jobGetQueryResultsRequest": null,
+                "tableDataListRequest": null,
+                "setIamPolicyRequest": null,
+                "tableInsertResponse": null,
+                "tableUpdateResponse": null,
+                "datasetInsertResponse": null,
+                "datasetUpdateResponse": null,
+                "jobInsertResponse": null,
+                "jobQueryResponse": null,
+                "jobGetQueryResultsResponse": null,
+                "jobQueryDoneResponse": null,
+                "policyResponse": null,
+                "jobCompletedEvent": {
+                    "eventName": "query_job_completed",
+                    "job": {
+                        "jobName": {
+                            "projectId": "qwiklabs-gcp-00-abe126c1e2db",
+                            "jobId": "bqjob_r6e87952d99622e7d_00000191d98e0c92_1",
+                            "location": "US"
+                        },
+                        "jobConfiguration": {
+                            "query": {
+                                "query": "select month, avg(mean_temp) as avgtemp from `qwiklabs-resources.qlweather_geo.gsod`\n where station_number \u003d 947680\n and year \u003d 2010\n group by month\n order by month",
+                                "destinationTable": {
+                                    "projectId": "qwiklabs-gcp-00-abe126c1e2db",
+                                    "datasetId": "_d7b2b8d8bab71ae6db8f8a2342a39fafcaa7506c",
+                                    "tableId": "anon52b1df09_d1df_4f2b_a0b2_5e61ed304760"
+                                },
+                                "createDisposition": "CREATE_IF_NEEDED",
+                                "writeDisposition": "WRITE_TRUNCATE",
+                                "defaultDataset": null,
+                                "tableDefinitions": [],
+                                "queryPriority": "QUERY_INTERACTIVE",
+                                "destinationTableEncryption": null,
+                                "statementType": "SELECT"
+                            },
+                            "load": null,
+                            "extract": null,
+                            "tableCopy": null,
+                            "dryRun": null,
+                            "labels": []
+                        },
+                        "jobStatus": {
+                            "state": "DONE",
+                            "error": null,
+                            "additionalErrors": []
+                        },
+                        "jobStatistics": {
+                            "createTime": "2024-09-10 01:30:51.141000 UTC",
+                            "startTime": "2024-09-10 01:30:51.282000 UTC",
+                            "endTime": "2024-09-10 01:30:51.817000 UTC",
+                            "totalProcessedBytes": "3889392448",
+                            "totalBilledBytes": "3890216960",
+                            "billingTier": "1",
+                            "totalSlotMs": "7910",
+                            "reservationUsage": [],
+                            "reservation": "unreserved",
+                            "referencedTables": [
+                                {
+                                    "projectId": "qwiklabs-resources",
+                                    "datasetId": "qlweather_geo",
+                                    "tableId": "gsod"
+                                }
+                            ],
+                            "totalTablesProcessed": "1",
+                            "referencedViews": [],
+                            "totalViewsProcessed": null,
+                            "queryOutputRowCount": "12",
+                            "totalLoadOutputBytes": null
+                        }
+                    }
+                },
+                "tableDataReadEvents": []
+            }
+        },
+        "textPayload": null,
+        "timestamp": "2024-09-10 01:30:51.853067 UTC",
+        "receiveTimestamp": "2024-09-10 01:30:52.118696 UTC",
+        "severity": "INFO",
+        "insertId": "-krtcdleajcan",
+        "httpRequest": null,
+        "operation": null,
+        "trace": null,
+        "spanId": null,
+        "traceSampled": null,
+        "sourceLocation": null,
+        "split": null,
+        "errorGroups": []
+    }
+]

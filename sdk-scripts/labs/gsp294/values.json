@@ -1,0 +1,5 @@
+{
+  "name": "qwiklabs-gcp-00-1a8012c1f660-bucket",
+  "location": "us",
+  "storageClass": "multi_regional"
+}

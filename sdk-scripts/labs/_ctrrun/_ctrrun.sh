@@ -57,7 +57,7 @@ images:
 - '${REPO}/sample-node-app-image'
 EOF
 
-gcloud builds submit --region=$REGION --config=cloudbuild.yaml --project $PROJECT_ID &
+gcloud builds submit --region=$REGION --config=cloudbuild.yaml --project $PROJECT_ID
 
 # ============================= TASK 4 ===================================
 
@@ -65,12 +65,13 @@ gcloud run deploy sample-node-app \
     --region $REGION \
     --project $PROJECT_ID \
     --allow-unauthenticated \
-    --image us-docker.pkg.dev/cloudrun/container/hello  # ${REPO}/sample-node-app-image 
+    --image ${REPO}/sample-node-app-image 
 
 # ============================== TASK 5 =================================
 
 export URL=$(gcloud run services list --format='value(URL)' --project $PROJECT_ID)
 
-curl $URL
-curl $URL/service/products
-curl $URL/service/products
+curl $URL/service/products | jq
+curl $URL/service/products | jq
+curl $URL/service/products | jq
+curl $URL/service/products | jq

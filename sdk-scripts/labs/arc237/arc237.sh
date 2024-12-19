@@ -13,7 +13,8 @@ gcloud functions deploy cf-demo \
     --region=$REGION \
     --source=. \
     --entry-point=helloPubSub \
-    --trigger-topic=cf_topic 
+    --trigger-topic=cf_topic \
+    --project $PROJECT_ID
 
 echo "${BG_RED}${BOLD}Congratulations For Completing The Lab !!!${RESET}"
 

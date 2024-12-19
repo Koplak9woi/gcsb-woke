@@ -1,0 +1,16 @@
+{
+  "name": "palm2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google-ai/generativelanguage": "^2.6.0",
+    "google-auth-library": "^9.14.0",
+    "open": "^10.1.0"
+  }
+}
