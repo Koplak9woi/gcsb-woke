@@ -3,7 +3,7 @@
  * Use it Wisely!!!
  *
  * https://github.com/AguzzTN54 - https://github.com/Mantan21
- * Last Test: 11 Jul 2024
+ * Last Test: 15 Dec 2024
  *
  * HOW TO USE?
  * 1. Open Lab - don't start yet.
@@ -44,7 +44,8 @@ const checkLab = async (labInstanceId) => {
 
 const endLab = async () => {
     const finalize = document.querySelector('#js-are-you-sure-button');
-    const finalizeButton = finalize.shadowRoot.querySelector('button');
+    const mdText = finalize?.shadowRoot.querySelector('md-text-button');
+    const finalizeButton = mdText.shadowRoot.querySelector('button');
     finalizeButton.click();
 };
 
