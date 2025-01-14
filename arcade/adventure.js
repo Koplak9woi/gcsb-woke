@@ -14,39 +14,61 @@
  *
  */
 
-const sumbitAssestment = async ({ project_id, region }) => {
+const submitAssessment = async ({ project_id, region }) => {
     const targetHOST = `${region}-${project_id}.cloudfunctions.net`;
     const targetURL = `https://${targetHOST}/arcade-1?message=arcade`;
-    const finalize = await fetch(targetURL);
-    const response = await finalize.text();
-    console.group('%c Task Done✔✔✔', 'color: #34a853;');
-    console.log(response);
-    console.groupEnd();
-    return response;
+    try {
+        const response = await fetch(targetURL);
+        const text = await response.text();
+        console.group('%c Task Done✔✔✔', 'color: #00aaff;');
+        console.log(text);
+        console.groupEnd();
+        return text;
+    } catch (error) {
+        console.error('Error in submitAssessment:', error);
+        return null;
+    }
 };
 
 /**
  * LAB CONTROLLER
  */
-const checkLab = async (labInstanceId) => {
+const checkLab = async (labInstanceId, interval = 5000) => {
     console.log('%c Almost Done.. Verifying..', 'color:#00aaff; font-weight:800;');
-
     const qwiklab = 'https://www.cloudskillsboost.google';
     const stepURL = `${qwiklab}/assessments/run_step.json?id=${labInstanceId}&step=1&u=${Math.random()}`;
-    const data = await fetch(stepURL);
-    const { percent_complete } = await data.json();
-    const isComplete = percent_complete === 100;
+    
+    const pollLab = async () => {
+        try {
+            const response = await fetch(stepURL);
+            const { percent_complete } = await response.json();
+            if (percent_complete === 100) {
+                console.log('%c LAB ENDED!', 'color:green; font-weight:800; font-size: 200%');
+                endLab();
+                return true;
+            }
+        } catch (error) {
+            console.error('Error in checkLab:', error);
+        }
+        return false;
+    };
 
-    if (!isComplete) return checkLab(labInstanceId);
-    console.log('%c LAB ENDED !', 'color:green; font-weight:800; font-size: 200%');
-    endLab();
+    // Poll at regular intervals
+    const pollInterval = setInterval(async () => {
+        const isComplete = await pollLab();
+        if (isComplete) clearInterval(pollInterval);
+    }, interval);
 };
 
 const endLab = async () => {
-    const finalize = document.querySelector('#js-are-you-sure-button');
-    const mdText = finalize?.shadowRoot.querySelector('md-text-button');
-    const finalizeButton = mdText.shadowRoot.querySelector('button');
-    finalizeButton.click();
+    try {
+        const finalize = document.querySelector('#js-are-you-sure-button');
+        const mdText = finalize?.shadowRoot.querySelector('md-text-button');
+        const finalizeButton = mdText.shadowRoot.querySelector('button');
+        finalizeButton.click();
+    } catch (error) {
+        console.error('Error in endLab:', error);
+    }
 };
 
 /**
@@ -65,19 +87,25 @@ const taskCheater = async (resource) => {
 
         // Don't run function if already executed
         if (isProcessed) return;
-        console.log('%c LAB STARTED !', 'color:#d93025; font-weight:800; font-size: 200%');
+        console.log('%c LAB STARTED!', 'color:#d93025; font-weight:800; font-size: 200%');
         console.table(startup_script);
         isProcessed = true;
 
         ({ arcade_data, lab_code, service_url } = startup_script);
-        await sumbitAssestment({ project_id, region });
+
+        // Submit initial assessment
+        await submitAssessment({ project_id, region });
+
+        // Check lab completion
         checkLab(labInstanceId);
 
-        let x = 0;
-        for (x > 0; x < 10; x++) {
-            await sumbitAssestment({ project_id, region });
-        }
-    } catch (e) {}
+        // Batch multiple submissions concurrently
+        await Promise.all(
+            Array.from({ length: 4 }, () => submitAssessment({ project_id, region }))
+        );
+    } catch (e) {
+        console.error('Error in taskCheater:', e);
+    }
 };
 
 // Intercept Fetch Function
