@@ -49,20 +49,20 @@ bq mk --project_id=$PROJECT_ID \
   $PROJECT_ID:soccer.events \
   qtr:STRING &
 
-# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.competitions gs://spls/bq-soccer-analytics/competitions.json &
+bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.competitions gs://spls/bq-soccer-analytics/competitions.json &
 
-# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.matches gs://spls/bq-soccer-analytics/matches.json &
+bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.matches gs://spls/bq-soccer-analytics/matches.json &
 
-# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.teams gs://spls/bq-soccer-analytics/teams.json &
+bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.teams gs://spls/bq-soccer-analytics/teams.json &
 
-# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.players gs://spls/bq-soccer-analytics/players.json &
+bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.players gs://spls/bq-soccer-analytics/players.json &
 
-# bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.events gs://spls/bq-soccer-analytics/events.json &
+bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON $PROJECT_ID:soccer.events gs://spls/bq-soccer-analytics/events.json &
 
 
 # task 4
 
-# bq load --autodetect --source_format=CSV $PROJECT_ID:soccer.tags2name gs://spls/bq-soccer-analytics/tags2name.csv &
+bq load --autodetect --source_format=CSV $PROJECT_ID:soccer.tags2name gs://spls/bq-soccer-analytics/tags2name.csv &
 
 #task 6
 

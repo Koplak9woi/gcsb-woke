@@ -1,0 +1,3 @@
+PROJECT_ID=qwiklabs-gcp-04-53792163ab39
+USER_EMAIL=student-03-f4055c54dc0d@qwiklabs.net
+REGION=europe-west1

@@ -1,14 +1,11 @@
-# export ZONE_1=
-# export ZONE_2=
-# export ZONE_3=
+export REGION_1=
+export REGION_2=
+export REGION_3=
+export PROJECT_ID=
 
 #----------------------------------------------------start--------------------------------------------------#
 
 echo "${YELLOW}${BOLD}Starting${RESET}" "${GREEN}${BOLD}Execution${RESET}"
-
-export REGION_1=${ZONE_1%-*}
-export REGION_2=${ZONE_2%-*}
-export REGION_3=${ZONE_3%-*}
 
 gcloud compute networks create taw-custom-network \
     --subnet-mode custom \
