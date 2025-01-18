@@ -27,8 +27,6 @@ echo "${BG_MAGENTA}${BOLD}Starting Execution${RESET}"
 
 export PROJECT_ID=$(gcloud config get-value project)
 
-export ZONE=us-central1-c
-
 export PROJECT_NUMBER=$(gcloud projects describe ${PROJECT_ID} \
     --format="value(projectNumber)")
 

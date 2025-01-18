@@ -33,7 +33,6 @@ node browser-automation.js &
 
 # INITIALIZING GOOGLE CLOUD SDK
 # ./autoinit.sh       # Disable this if your system doesn't support "expect" command
-gcloud init --skip-diagnostics
 gcloud auth login   # Faster Initialization
 
 # Use Below to create Credential for Workspace API
@@ -58,6 +57,6 @@ export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/legacy_cre
 # export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/application_default_credentials.json"
 
 # REPlACE WITH YOUR LAB ID
-LABID="gsp072"   # example => gsp016
+LABID="gsp001"   # example => gsp016
 
 ./labs/${LABID}/${LABID}.sh

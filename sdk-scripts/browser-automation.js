@@ -3,10 +3,10 @@
  *  ------------ PLEASE ENSURE to SET THE LAB URI and VARIABLES before running the scripts!!! --------------
  *  ======================================================================================================== */
 
-const labURI = 'https://www.cloudskillsboost.google/games/5791/labs/36965'; // example => "https://cloudskillsboost.google/games/5156/labs/33678"
+const labURI = 'https://www.cloudskillsboost.google/games/5869/labs/37344'; // example => "https://cloudskillsboost.google/games/5156/labs/33678"
 const delayBeforeCheckLab = 90; // in seconds
-const checkUI = true; // Show Green tick after step complete?
-const browserPORT = 9220; // Your Browser Debugging Port
+const checkUI = false; // Show Green tick after step complete?
+const browserPORT = 9222; // Your Browser Debugging Port
 const terms = [
     // 'cloud', // GCP API
     // 'universal', // WorkSpace API
@@ -19,6 +19,7 @@ const manual = [
     // 'https://script.google.com/home/usersettings', // Enable Apscript API Access
 ];
 const variables = [
+    { var: 'ZONE', prop: 'project_0.default_zone_1' },
     // NEEDS TO BE CHANGED depending on the lab's requirements.
     // Find the required variable in VARIABLES.md or leave this array blank if the lab doesn't need one.
 ];
