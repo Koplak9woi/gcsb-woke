@@ -51,12 +51,12 @@ done < tmp/variables.txt
 export GOOGLE_CLOUD_PROJECT=$PROJECT_ID
 export GOOGLE_CLOUD_QUOTA_PROJECT=$PROJECT_ID
 export USER_NAME=$(echo $USER_EMAIL | grep -oE "(student[-a-z0-9]+)")
-export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/legacy_credentials/$USER_EMAIL/adc.json"
+# export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/legacy_credentials/$USER_EMAIL/adc.json"
 
 # Use this for Application Default Credential Auth
-# export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/application_default_credentials.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/application_default_credentials.json"
 
 # REPlACE WITH YOUR LAB ID
-LABID="gsp001"   # example => gsp016
+LABID="gsp073"   # example => gsp016
 
 ./labs/${LABID}/${LABID}.sh

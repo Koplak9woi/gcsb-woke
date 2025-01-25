@@ -1,0 +1,17 @@
+{
+  "inspectTemplate": {
+    "displayName": "quickgcplab",
+    "inspectConfig": {
+      "infoTypes": [
+        {
+          "name": "PHONE_NUMBER"
+        },
+        {
+          "name": "EMAIL_ADDRESS"
+        }
+      ],
+      "minLikelihood": "POSSIBLE",
+      "limits": {}
+    }
+  }
+}

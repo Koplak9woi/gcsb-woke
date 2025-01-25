@@ -1,0 +1,31 @@
+{
+  "deidentifyTemplate": {
+    "deidentifyConfig": {
+      "recordTransformations": {
+        "fieldTransformations": [
+          {
+            "fields": [
+              { "name": "ssn" },
+              { "name": "ccn" },
+              { "name": "email" },
+              { "name": "vin" },
+              { "name": "id" },
+              { "name": "agent_id" },
+              { "name": "user_id" }
+            ],
+            "primitiveTransformation": {
+              "replaceConfig": {
+                "newValue": {
+                  "stringValue": "[redacted]"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "displayName": "deid_struct1 template"
+  },
+  "templateId": "deid_struct1",
+  "locationId": "global"
+}

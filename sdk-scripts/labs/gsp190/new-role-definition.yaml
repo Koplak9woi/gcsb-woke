@@ -5,6 +5,6 @@ includedPermissions:
 - appengine.versions.delete
 - storage.buckets.get
 - storage.buckets.list
-name: projects/qwiklabs-gcp-02-016bd4a13851/roles/editor
+name: projects/qwiklabs-gcp-02-3e0d31e73505/roles/editor
 stage: ALPHA
 title: Role Editor

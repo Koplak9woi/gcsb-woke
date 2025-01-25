@@ -1,3 +1,0 @@
-PROJECT_ID=qwiklabs-gcp-03-28952aba98d0
-USER_EMAIL=student-03-94d76a35dda2@qwiklabs.net
-ZONE=us-east4-a

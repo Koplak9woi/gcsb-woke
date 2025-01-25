@@ -34,6 +34,15 @@
 ];
 ```
 
+### ARC102
+
+````js
+[
+    { var: 'REGION', prop: 'primary_project.default_region_1' },
+    { var: 'FUNCTION_NAME', prop: 'project_0.startup_script.function' },
+    { var: 'TOPIC_NAME', prop: 'project_0.startup_script.topic' },
+]
+
 ### GSP118
 
 ```js
@@ -41,7 +50,7 @@
     { var: 'ZONE_1', prop: 'project_0.default_zone_1' },
     { var: 'ZONE_2', prop: 'project_0.default_zone_2' },
 ];
-```
+````
 
 ### GSP016
 
