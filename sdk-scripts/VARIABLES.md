@@ -16,6 +16,16 @@
 ]
 ```
 
+# GSP041
+
+<!-- prettier-ignore -->
+```js
+[
+    { var: 'ZONE', prop: 'primary_project.default_zone_1' },
+    { var: 'STATIC_IP', prop: 'primary_project.static_ip_1' },
+]
+```
+
 # GSP1086
 
 <!-- prettier-ignore -->
