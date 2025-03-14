@@ -21,10 +21,12 @@ RESET=`tput sgr0`
 #----------------------------------------------------start--------------------------------------------------#
 
 echo "${YELLOW}${BOLD}Starting${RESET}" "${GREEN}${BOLD}Execution${RESET}"
-export PROJECT_ID=gcloud config set project $(gcloud projects list --format='value(PROJECT_ID)' --filter='qwiklabs-gcp')
+export REGION=$(gcloud compute project-info describe \
+--format="value(commonInstanceMetadata.items[google-compute-default-region])")
 
-gcloud storage buckets create gs://$PROJECT_ID --location=$REGION
-
+PROJECT_ID=`gcloud config get-value project`
+BUCKET=${PROJECT_ID}-bucket
+gsutil mb -l $REGION gs://${BUCKET}
 echo "${RED}${BOLD}Congratulations${RESET}" "${WHITE}${BOLD}for${RESET}" "${GREEN}${BOLD}Completing the Lab !!!${RESET}"
 
 #-----------------------------------------------------end----------------------------------------------------------#
