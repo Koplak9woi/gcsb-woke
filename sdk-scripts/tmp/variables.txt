@@ -1,2 +1,2 @@
-PROJECT_ID=qwiklabs-gcp-04-6863655c8b12
-USER_EMAIL=student-04-083c6c627d9e@qwiklabs.net
+PROJECT_ID=qwiklabs-gcp-02-e22a72b9838c
+USER_EMAIL=student-02-fa8f48496696@qwiklabs.net

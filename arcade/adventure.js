@@ -33,7 +33,7 @@ const submitAssessment = async ({ project_id, region }) => {
 /**
  * LAB CONTROLLER
  */
-const checkLab = async (labInstanceId, interval = 5000) => {
+const checkLab = async (labInstanceId, interval = 10) => {
     console.log('%c Almost Done.. Verifying..', 'color:#00aaff; font-weight:800;');
     const qwiklab = 'https://www.cloudskillsboost.google';
     const stepURL = `${qwiklab}/assessments/run_step.json?id=${labInstanceId}&step=1&u=${Math.random()}`;
