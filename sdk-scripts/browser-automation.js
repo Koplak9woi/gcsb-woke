@@ -3,9 +3,9 @@
  *  ------------ PLEASE ENSURE to SET THE LAB URI and VARIABLES before running the scripts!!! --------------
  *  ======================================================================================================== */
 
-const labURI = 'https://www.cloudskillsboost.google/games/5906/labs/37564'; // example => "https://cloudskillsboost.google/games/5156/labs/33678"
-const delayBeforeCheckLab = 90; // in seconds
-const checkUI = false; // Show Green tick after step complete?
+const labURI = 'https://www.cloudskillsboost.google/games/6064/labs/38619'; // example => "https://cloudskillsboost.google/games/5156/labs/33678"
+const delayBeforeCheckLab = 60; // in seconds
+const checkUI = true; // Show Green tick after step complete?
 const browserPORT = 9222; // Your Browser Debugging Port
 const terms = [
     // 'cloud', // GCP API

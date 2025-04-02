@@ -1,3 +1,6 @@
+#!/bin/bash
+# Define color variables
+
 BLACK=`tput setaf 0`
 RED=`tput setaf 1`
 GREEN=`tput setaf 2`
@@ -20,13 +23,18 @@ BOLD=`tput bold`
 RESET=`tput sgr0`
 #----------------------------------------------------start--------------------------------------------------#
 
-echo "${YELLOW}${BOLD}Starting${RESET}" "${GREEN}${BOLD}Execution${RESET}"
-export REGION=$(gcloud compute project-info describe \
---format="value(commonInstanceMetadata.items[google-compute-default-region])")
+echo "${BG_MAGENTA}${BOLD}Starting Execution${RESET}"
 
-PROJECT_ID=`gcloud config get-value project`
-BUCKET=${PROJECT_ID}-bucket
-gsutil mb -l $REGION gs://${BUCKET}
-echo "${RED}${BOLD}Congratulations${RESET}" "${WHITE}${BOLD}for${RESET}" "${GREEN}${BOLD}Completing the Lab !!!${RESET}"
+gcloud services enable apikeys.googleapis.com
+
+gcloud alpha services api-keys create --display-name="awesome" 
+
+KEY_NAME=$(gcloud alpha services api-keys list --format="value(name)" --filter "displayName=awesome")
+
+API_KEY=$(gcloud alpha services api-keys get-key-string $KEY_NAME --format="value(keyString)")
+
+echo $API_KEY
+
+echo "${BG_RED}${BOLD}Congratulations For Completing The Lab !!!${RESET}"
 
 #-----------------------------------------------------end----------------------------------------------------------#

@@ -57,6 +57,6 @@ export USER_NAME=$(echo $USER_EMAIL | grep -oE "(student[-a-z0-9]+)")
 export GOOGLE_APPLICATION_CREDENTIALS="/home/aguzztn54/.config/gcloud/application_default_credentials.json"
 
 # REPlACE WITH YOUR LAB ID
-LABID="gsp421"   # example => gsp016
+LABID="gsp702"   # example => gsp016
 
 ./labs/${LABID}/${LABID}.sh
